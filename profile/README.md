@@ -1,6 +1,6 @@
 # Immersive Digital Twin Laboratory for Engineering Education -- System Documentation
 
-##  1 Overview
+##  1. Overview
 
 This document provides an in-depth overview of the FLC Solar Lab design
 and usage, describing the system components, software architecture, key
@@ -22,7 +22,34 @@ their virtual counterparts. It supports cross-platform communication
 using the NOODLES protocol and built with flexible frameworks like Unity
 and Godot to lower the barrier to entry to less experienced developers.
 
-## 2 Physical Components
+![Lab Architecture](images/LabArchitecture.png)
+
+### Repositories
+#### Client (HMD) Application
+- [HMDClient](https://github.com/FLC-Solar-Lab/HMDClient.git) Magic Leap 2 Unity client, It serves as a generic NOODLES client, providing interaction between the headsets and the
+broader system infrastructure.
+
+#### Full Server Applications
+- [IrradianceSim](https://github.com/FLC-Solar-Lab/IrradianceSim) a minimally complete demonstration, integrating real-time simulation of surface irradiance on physical referents from a virutal sun. 
+- [FLCPVPanel](https://github.com/FLC-Solar-Lab/FLCPVPanel) a more sophisticated digital twin proof-of-concept demonstration, providing an interactive visualization of power flow in selected PV modules based on physical orientation, shading, and other enviromental factors.
+    - [pvpanelsim](https://github.com/FLC-Solar-Lab/pvpanelsim) Digital twin submodule based on pvlib and pvmismatch
+- [FLCHouse](https://github.com/FLC-Solar-Lab/FLCHouse) a more sophisticated digital twin proof-of-concept demonstration, 
+providing the ability to manipulate solar panel layout on an interactive architectural model. This hands-on demonstration allows students to explore real-world considerations for solar installation, including panel orientation and shading effects.
+    - [pvpanelsim](https://github.com/FLC-Solar-Lab/pvpanelsim) Digital twin submodule based on pvlib and pvmismatch
+    - [HouseSensing](https://github.com/FLC-Solar-Lab/HouseSensing) Raspberry Pi micropython code and hardware schematics used to detect the presence of physical PV module models on the architecutral-scale house using a Pi Pico W and Hall Sensors.
+- [MagnetSim](https://github.com/FLC-Solar-Lab/DevelopmentTutorial) is a tutorial repository to walk users through the development of a FLC Solar Lab application, creating a real-time simulation of force between two volumetric magnets.
+
+#### Server Application Template
+- [FLCServerTemplate](https://github.com/FLC-Solar-Lab/FLCServerTemplate) is a foundational repository designed to streamline the development of FLC Solar Lab applications, providing a structured base for integrating real-time visualizations with scientific simulations, supporting synchronization between physical and digital environments.
+
+#### Backend code
+- [noodles_server](https://github.com/FLC-Solar-Lab/noodles_server) a Godot server library implements the NOODLES messaging protocol and provides objects for maintaining a scene in state. The server uses a websocket connection to send CBOR encoded messages. To customize its implementation, the library provides convenient interface methods to assist the user in writing their own methods for the server. The user can also add custom delegates to add additional functionality to any of the standard components.
+
+#### Physical assets
+
+- [markers](https://github.com/FLC-Solar-Lab/markers) VRPN and ARuCO markers for the FLC Solar Lab.
+
+## 2. Physical Components
 
 ### Whole Room Tracking
 
@@ -170,7 +197,7 @@ devices, such as HMDs, desktops, and mobile clients. The compute server
 also hosts digital twin simulations, providing the computational
 resources needed to simulate physical systems like PV modules.
 
-## 3 Software Components
+## 3. Software Components
 
 The foundation of the Solar Lab's software platform is **[NOODLES](https://github.com/InsightCenterNoodles) (NREL
 Object Oriented Data Layout and Exploration System)**, a, cross-domain
@@ -208,7 +235,7 @@ fostering collaboration and accessibility.
     visualization tool like the [FLC PV Panel](https://github.com/FLC-Solar-Lab/FLCPVPanel) application) acts as the server, maintaining the state and
     generating the visualization.
 
--   [**Client:**](https://github.com/FLC-Solar-Lab/BlandNoodles) An arbitrary client application receives and
+-   [**Client:**](https://github.com/FLC-Solar-Lab/HMDClient.git) An arbitrary client application receives and
     synchronizes the visualization, enabling interaction. Multiple
     clients can connect to the same server simultaneously.
 
@@ -236,19 +263,20 @@ fostering collaboration and accessibility.
     participants act as nodes that can connect to multiple servers and
     clients.
 
-NOODLES embodies a technology-minimal philosophy**,** attempting to
+NOODLES embodies a technology-minimal philosophy, attempting to
 simplify integration of software tools and displays. It bridges gaps
 between specialized tools and fosters collaboration across teams and
 locations, ensuring the Solar Lab remains at the forefront of immersive
 and interactive visualization.
 
-TODO: System Diagram of core system and where they add their own bits to
-create new applications.
+NOODLES References:
+- [NOODLES (SWR-22-78)](https://www.osti.gov/biblio/1897175)
+- [Noodles: Cooking Up Collaborative Visualization](https://research-hub.nrel.gov/en/publications/noodles-cooking-up-collaborative-visualization)
 
 ### FLC Client Side
 
 The FLC client-side application is a [Magic Leap 2 NOODLES
-Client](https://github.com/FLC-Solar-Lab/BlandNoodles) developed in Unity, designed to provide an interface for the
+Client](https://github.com/FLC-Solar-Lab/HMDClient.git) developed in Unity, designed to provide an interface for the
 Solar Lab’s immersive visualization environment. It serves as a generic
 NOODLES client, providing interaction between the headsets and the
 broader system infrastructure.
@@ -270,6 +298,8 @@ broader system infrastructure.
         marker. This ensures precise alignment between the Magic Leap
         2’s local coordinate system and the Vicon VRPN coordinate
         system.
+
+        ![FLC Origin](images/FLC_ORIGIN.jpg)
 
     -   The process guarantees that visualizations and interactions are
         correctly anchored in the physical laboratory space.
@@ -336,17 +366,17 @@ is a foundational Git repository designed to streamline the development of serve
 
 This repository serves as a starting point for new projects, offering modular and extensible code that can be adapted for various simulation and visualization needs. The [IrradianceSim](https://github.com/FLC-Solar-Lab/IrradianceSim) application is an example implementation built from this template, demonstrating how to use the provided stubs to create a fully functional digital twin environment.
 
-## 4 Proof-of-Concept Examples
+## 4. Proof-of-Concept Examples
 
-# Irradiance Simulation 
+### Irradiance Simulation 
 
-[IrradianceSim](https://github.com/FLC-Solar-Lab/IrradianceSim) IrradianceSim is a foundational application for the FLCSolarLab, demonstrating how digital twin visualizations can integrate physical and virtual elements in a mixed-reality environment. It provides a simple example of real-time simulation, physical referents, and virutal objects, serving as a template for future applications.
+[IrradianceSim](https://github.com/FLC-Solar-Lab/IrradianceSim) is a foundational application for the FLCSolarLab, demonstrating how digital twin visualizations can integrate physical and virtual elements in a mixed-reality environment. It provides a simple example of real-time simulation, physical referents, and virutal objects, serving as a template for future applications.
 
 The system consists of a Godot 4.3 project that generates interactive visualizations and a pvlib-based irradiance model that calculates irradiance values on a physical surface based on the orientation of a virtual sun.
 
 The Godot server streams these visualizations via the NOODLES protocol, enabling synchronization of real-world and simulated data across head-mounted displays (HMDs) and other connected devices. This ensures accurate alignment between physical interactions and digital augmentations, making IrradianceSim a scalable and adaptable starting point for expanding the capabilities of the FLCSolarLab.
 
-# PV Panel Simulation
+### PV Panel Simulation
 
 [FLCPVPanel](https://github.com/FLC-Solar-Lab/FLCPVPanel) is a PV Panel Simulation, providing digital twin proof-of-concept demonstration
 for the lab, showcasing the capabilities of manipulating tracked
@@ -374,3 +404,9 @@ A complete description can found in the paper:
 N. Brunhart-Lupo, K. Gruchalla, L. Williams, S. Elias.
 [Situated Visualization of Photovoltaic Module Performance for Workforce Development](https://ieeexplore.ieee.org/document/10747633) Energy Visualization 2024, November 2024.
 ([preprint](https://www.nrel.gov/docs/fy25osti/90491.pdf))
+
+### House PV Simulation
+
+[FLCHouse](https://github.com/FLC-Solar-Lab/FLCHouse) The house proof-of-concept introduces students to the fundamentals of solar panel layout through an interactive architectural model. This hands-on experience allows students to explore real-world considerations for solar installation, including panel orientation and shading effects.
+
+The model is designed with pre-defined roof tilts of 18.5 degrees, reflecting common residential roof angles. Students begin by positioning solar panels on the model, considering factors such as available roof space and exposure to sunlight. The objective of this exercise is to provide an intuitive understanding of how panel placement influences solar energy production while introducing core concepts such as azimuth angle and shading.
