@@ -37,6 +37,7 @@ broader system infrastructure.
 providing the ability to manipulate solar panel layout on an interactive architectural model. This hands-on demonstration allows students to explore real-world considerations for solar installation, including panel orientation and shading effects.
     - [pvpanelsim](https://github.com/FLC-Solar-Lab/pvpanelsim) Digital twin submodule based on pvlib and pvmismatch
     - [HouseSensing](https://github.com/FLC-Solar-Lab/HouseSensing) Raspberry Pi micropython code and hardware schematics used to detect the presence of physical PV module models on the architecutral-scale house using a Pi Pico W and Hall Sensors.
+- [Sunnyside](https://github.com/FLC-Solar-Lab/Sunnyside) provides virutal-only (i.e., no physically tracked objects) digital twin of the LPEA Sunnyside Community Solar Project, providing an interactive visualization of the panel operation and simulation of the project power production for current, forecasted, and historical weather conditions.
 - [MagnetSim](https://github.com/FLC-Solar-Lab/DevelopmentTutorial) is a tutorial repository to walk users through the development of a FLC Solar Lab application, creating a real-time simulation of force between two volumetric magnets.
 
 #### Server Application Template
